@@ -1,28 +1,37 @@
 {
   "name": "react-native-ssh-sftp",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "description": "SSH and SFTP client library for React Native.",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
     "android/",
     "ios/",
-    "index.js",
+    "dist/",
     "RNSSHClient.podspec"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "prettier:write": "npx prettier --write **/*.{js,jsx,ts,tsx,json} && npx prettier --write *.{js,jsx,ts,tsx,json}"
   },
   "keywords": [
     "react-native"
   ],
   "author": "Qian Sha",
   "license": "MIT",
-  "peerDependencies": {
-    "react-native": "^0.54.0"
+  "devDependencies": {
+    "@types/node": "^13.7.4",
+    "@types/react-native": "^0.61.16",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "react-native": "^0.60.0",
+    "typescript": "^3.7.0"
   },
-  "repository" :
-  {
-    "type" : "git",
-    "url" : "https://github.com/shaqian/react-native-ssh-sftp.git"
+  "peerDependencies": {
+    "react-native": "^0.60.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shaqian/react-native-ssh-sftp.git"
   }
 }

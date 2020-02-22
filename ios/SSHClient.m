@@ -12,6 +12,7 @@
 
 int downloadedPerc = 0;
 int uploadedPerc = 0;
+int progressThreshold = 1;
 
 - (instancetype)init {
     if ((self = [super init])) {
@@ -29,7 +30,7 @@ int uploadedPerc = 0;
     NMSSHChannel *channel = _session.channel;
     channel.delegate = self;
     channel.requestPty = YES;
-    
+
     NSArray *items = @[@"vanilla", @"vt100", @"vt102", @"vt220", @"ansi", @"xterm"];
     NSUInteger item = [items indexOfObject:ptyType];
     switch (item) {
@@ -52,7 +53,7 @@ int uploadedPerc = 0;
             type = NMSSHChannelPtyTerminalXterm;
             break;
     }
-    
+
     channel.ptyTerminalType = type;
     dispatch_async(dispatch_get_main_queue(), ^
     {
@@ -73,7 +74,7 @@ int uploadedPerc = 0;
     downloadedPerc = 0;
     NSData* data = [_sftpSession contentsAtPath:path progress: ^BOOL (NSUInteger bytes, NSUInteger fileSize) {
         int newPerc = (int)(100.0f * bytes / fileSize);
-        if (newPerc % 5 == 0 && newPerc > downloadedPerc) {
+        if (newPerc % progressThreshold == 0 && newPerc > downloadedPerc) {
             downloadedPerc = newPerc;
             [self.delegate downloadProgressEvent:downloadedPerc withKey:_key];
         }

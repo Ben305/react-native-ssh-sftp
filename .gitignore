@@ -3,6 +3,8 @@
 #
 .DS_Store
 
+#dist
+
 # node.js
 #
 node_modules/
